@@ -1,0 +1,300 @@
+
+#Forming the FA $(VDH_SEEDS) Trace 0.0
+#$(FOF_RESULTS)/grid_FA_1.0_Trace_0.0.dat
+#Groups searching in the search files FA $(VDH_SEEDS) Trace 0.0
+#'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+#Graphs with the FA $(VDH_SEEDS) Trace 0.0
+# '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png
+FOF_SRC_FOLDER='/home/laptop/Documentos/COLAB/skydata/grids_large_halos/FoF/src'
+RESULTS_FOLDER='/home/laptop/Documentos/COLAB/skydata/grids_large_halos/256_15B'
+N_FILES=4
+SNAP_FILE=256M
+
+VDH_SEEDS=750.0
+
+SCALE_FACTOR = 31250
+GRID = 256
+CUT_I = 32
+
+FOF_RESULTS=$(RESULTS_FOLDER)/FoF_Results
+#mkdir -p "$(FOF_RESULTS)"
+HIST_RESULTS=$(RESULTS_FOLDER)/Histograms
+#mkdir -p "$(HIST_RESULTS)"
+all: pipeline_script_1.py pipeline_script_2.py volume_plots_one.py pipeline_histograms.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png  '$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png '$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png '$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png
+
+	#First Cuts
+'$(HIST_RESULTS)'/FA_cut_i_$(CUT_I).png:pipeline_histograms_cuts_Complete.py
+	python pipeline_histograms_cuts_Complete.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) $(SCALE_FACTOR) $(CUT_I) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/VDH_cut_i_$(CUT_I).png:pipeline_histograms_cuts_Complete.py
+	python pipeline_histograms_cuts_Complete.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) $(SCALE_FACTOR) $(CUT_I) '$(HIST_RESULTS)'
+
+#Forming the inputs for the FOF algorithm
+'$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.5 $(VDH_SEEDS) '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.5 0.0 '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.6 $(VDH_SEEDS) '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.6 0.0 '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.7 $(VDH_SEEDS) '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.7 0.0 '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.8 $(VDH_SEEDS) '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.8 0.0 '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.9 $(VDH_SEEDS) '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 0.9 0.0 '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat:pipeline_script_1.py
+	python pipeline_script_1.py $(N_FILES) '$(RESULTS_FOLDER)'/0B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/1B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/2B/$(SNAP_FILE) '$(RESULTS_FOLDER)'/3B/$(SNAP_FILE) 1.0 0.0 '$(FOF_RESULTS)'
+
+# Seeds FA 0.5
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.5_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.6_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.7_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.8_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.9_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.5_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_1.0_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+
+# Seeds FA 0.6
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.5_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.6_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.7_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.8_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.9_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.6_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_1.0_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+# Seeds FA 0.7
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.5_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.6_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.7_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.8_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.9_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.7_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_1.0_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+
+# Seeds FA 0.8
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.5_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.6_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.7_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.8_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.9_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.8_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_1.0_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+# Seeds FA 0.9
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.5_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.5_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.6_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.6_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.7_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.7_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.8_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.8_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_0.9_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_0.9_Trace_0.0.dat '$(FOF_SRC_FOLDER)' '$(FOF_RESULTS)'
+
+'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat:pipeline_script_2.py
+	python pipeline_script_2.py '$(FOF_RESULTS)'/grid_FA_1.0_Trace_0.0.dat '$(FOF_RESULTS)'/grid_FA_0.9_Trace_$(VDH_SEEDS).dat '$(FOF_RESULTS)'/values_FA_1.0_Trace_0.0.dat
+
+
+#Histograms
+
+#Volumes vs Laniakea and Total Volume for Growth FA 0.9 and Search FA 0.0
+#MPC scale
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Mpc_laniakea_all_plot.png:volume_plots_one.py
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+#GPC scale
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_Gpc_laniakea_all_plot.png:volume_plots_one.py
+	python volume_plots_one.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#Seeds FA<0.5
+#With the data
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.5_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#Seeds FA<0.6
+#With the data
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#With the plotting file
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_diff_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+'$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_diff_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+# '$(HIST_RESULTS)'/inertia_cases_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+# '$(HIST_RESULTS)'/volumes_distr_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+# '$(HIST_RESULTS)'/inertia_diff_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+
+#Seeds FA<0.7
+#With the data
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.7_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#Seeds FA<0.8
+#With the data
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.6_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+
+#With the plotting file
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_diff_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+'$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/volumes_distr_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_diff_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:pipeline_histograms.py
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+# '$(HIST_RESULTS)'/inertia_cases_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+# '$(HIST_RESULTS)'/volumes_distr_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+# '$(HIST_RESULTS)'/inertia_diff_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:pipeline_histograms.py
+#	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.8_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#Seeds FA<0.9
+#With the data
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.5_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.6_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.7_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.8_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_0.9_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+'$(HIST_RESULTS)'/inertia_cases_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.png:'$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat
+	python pipeline_histograms.py '$(FOF_RESULTS)'/group_results_seeds_FA_0.9_Trace_$(VDH_SEEDS)_search_FA_1.0_Trace_0.0.dat $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+clean:
+	rm '$(FOF_RESULTS)'/*.dat '$(HIST_RESULTS)'/*.png
