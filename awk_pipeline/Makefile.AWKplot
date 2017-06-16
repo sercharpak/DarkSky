@@ -1,0 +1,37 @@
+
+#Example
+#python volume_plots_awk.py '/media/laptop/TOSHIBA EXT/DarkSky/1024Grid/15B/FoF_Results' 750.0 7812.5 1024 '/media/laptop/TOSHIBA EXT/DarkSky/1024Grid/15B/Histograms'
+#1024 grid
+#FOF_RESULTS=/media/laptop/TOSHIBA\ EXT/DarkSky/1024Grid/15B/FoF_Results
+#HIST_RESULTS=/media/laptop/TOSHIBA\ EXT/DarkSky/1024Grid/15B/Histograms
+
+FOF_RESULTS=/home/laptop/Documentos/COLAB/skydata/grids_large_halos/256_15B/FoF_Results/awk_Results
+HIST_RESULTS=/home/laptop/Documentos/COLAB/skydata/grids_large_halos/256_15B/FoF_Results/awk_Results/Histograms
+
+VDH_SEEDS=750.0
+
+#SCALE_FACTOR = 7812.5
+#GRID = 1024
+
+SCALE_FACTOR = 31250
+GRID = 256
+CUT_I = 32
+
+
+all: $(HIST_RESULTS)/volumes_distr_Mpc_laniakea_all_plot.png $(HIST_RESULTS)/volumes_distr_Gpc_laniakea_all_plot.png
+
+#Histograms
+
+#Volumes vs Laniakea and Total Volume for Growth FA 0.9 and Search FA 0.0
+#MPC scale
+$(HIST_RESULTS)/volumes_distr_Mpc_laniakea_all_plot.png: '$(FOF_RESULTS)'/0509/v_groups_vol_0509.dat '$(FOF_RESULTS)'/0609/v_groups_vol_0609.dat '$(FOF_RESULTS)'/0709/v_groups_vol_0709.dat '$(FOF_RESULTS)'/0809/v_groups_vol_0809.dat '$(FOF_RESULTS)'/0909/v_groups_vol_0909.dat
+		python volume_plots_awk.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+#GPC scale
+$(HIST_RESULTS)/volumes_distr_Gpc_laniakea_all_plot.png: '$(FOF_RESULTS)'/0509/v_groups_vol_0509.dat '$(FOF_RESULTS)'/0609/v_groups_vol_0609.dat '$(FOF_RESULTS)'/0709/v_groups_vol_0709.dat '$(FOF_RESULTS)'/0809/v_groups_vol_0809.dat '$(FOF_RESULTS)'/0909/v_groups_vol_0909.dat
+		python volume_plots_awk.py '$(FOF_RESULTS)' $(VDH_SEEDS) $(SCALE_FACTOR) $(GRID) '$(HIST_RESULTS)'
+
+
+
+clean:
+		rm '$(HIST_RESULTS)'/*.png

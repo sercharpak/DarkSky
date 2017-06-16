@@ -1,0 +1,28 @@
+
+FOF_RESULTS_FILE=../../fof.grp
+SEARCH_FILE= ../../grid_FA_0.9_Trace_0.0.dat
+SEEDS_FILE=../../grid_FA_0.5_Trace_750.0.dat
+SEED_SEARCH_SUFFIX=0509
+DELTA_N_ROWS=5
+
+all: n_rows_$(SEED_SEARCH_SUFFIX).dat v_groups_$(SEED_SEARCH_SUFFIX).dat distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat groups_vol_$(SEED_SEARCH_SUFFIX).dat v_groups_vol_$(SEED_SEARCH_SUFFIX).dat
+
+n_rows_$(SEED_SEARCH_SUFFIX).dat:$(SEEDS_FILE) $(SEARCH_FILE)
+	awk 'NR>6&&FNR==NR{a[$$0]; next} $$0 in a{print FNR - $(DELTA_N_ROWS)}' $(SEEDS_FILE) $(SEARCH_FILE) > n_rows_$(SEED_SEARCH_SUFFIX).dat
+#n_rows_$(SEED_SEARCH_SUFFIX).dat:$(SEARCH_FILE)
+#	awk 'FNR==NR{a[$$0]; next} $$0 in a{print FNR - $(DELTA_N_ROWS)}' $(SEEDS_FILE) $(SEARCH_FILE) > n_rows_$(SEED_SEARCH_SUFFIX).dat
+v_groups_$(SEED_SEARCH_SUFFIX).dat:$(FOF_RESULTS_FILE) n_rows_$(SEED_SEARCH_SUFFIX).dat
+	awk 'NR == FNR {nums[$$1]; next} FNR in nums' n_rows_$(SEED_SEARCH_SUFFIX).dat $(FOF_RESULTS_FILE) > v_groups_$(SEED_SEARCH_SUFFIX).dat
+#v_groups_$(SEED_SEARCH_SUFFIX).dat:n_rows_$(SEED_SEARCH_SUFFIX).dat
+#	awk 'NR == FNR {nums[$$1]; next} FNR in nums' n_rows_$(SEED_SEARCH_SUFFIX).dat $(FOF_RESULTS_FILE) > v_groups_$(SEED_SEARCH_SUFFIX).dat
+distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat:v_groups_$(SEED_SEARCH_SUFFIX).dat
+	awk '{ a[$$1]++ } END { for (b in a) { print b } }' v_groups_$(SEED_SEARCH_SUFFIX).dat > distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat
+groups_vol_$(SEED_SEARCH_SUFFIX).dat:$(FOF_RESULTS_FILE)
+	awk 'NR>1{h[$$1]++}; END { for(k in h) print k, h[k] }' $(FOF_RESULTS_FILE) > groups_vol_$(SEED_SEARCH_SUFFIX).dat
+v_groups_vol_$(SEED_SEARCH_SUFFIX).dat:groups_vol_$(SEED_SEARCH_SUFFIX).dat distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat
+	awk 'NR==FNR{c[$$1$$2]++;next};c[$$1] > 0' distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat groups_vol_$(SEED_SEARCH_SUFFIX).dat > v_groups_vol_$(SEED_SEARCH_SUFFIX).dat
+#v_groups_vol_$(SEED_SEARCH_SUFFIX).dat:distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat
+#	awk 'NR==FNR{c[$$1$$2]++;next};c[$$1$$2] > 0' distinct_v_groups_$(SEED_SEARCH_SUFFIX).dat groups_vol_$(SEED_SEARCH_SUFFIX).dat > v_groups_vol_$(SEED_SEARCH_SUFFIX).dat
+
+clean:
+	rm *.dat
